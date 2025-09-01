@@ -7,36 +7,37 @@ public class Property {
     private float downPayment;
     private float interestRate;
     private float taxes;
-    private float insurance;
-    private float additionalExpenses;
+    private float insuranceCosts;
+    private float additionalExpensesAnnual;
     private float closingCosts;
-    private float maintenanceCosts;
-    private float managementCosts;
-    private float rent;
+    private float maintenanceFactor;
+    private float managementFactor;
+    private float totalRents;
     private float renovationCosts;
     private float loanTerm;
-    private float yearlyUtilities;
-    private float vacancy;
-    private float otherIncome;
+    private float monthlyUtilities;
+    private float vacancyFactor;
+    private float additionalIncome;
+    private CashFlowYield cashFlowYield;
 
-    public Property(int id, String propertyAddress, float purchasePrice, float downPayment, float interestRate, float taxes, float insurance, float additionalExpenses, float closingCosts, float maintenanceCosts, float managementCosts, float renovationCosts, float loanTerm, float yearlyUtilities, float vacancy, float otherIncome, float rent) {
+    public Property(int id, String propertyAddress, float purchasePrice, float downPayment, float interestRate, float taxes, float insuranceCosts, float additionalExpensesAnnual, float closingCosts, float maintenanceFactor, float managementFactor, float renovationCosts, float loanTerm, float monthlyUtilities, float vacancyFactor, float additionalIncome, float totalRents) {
         this.id = id;
         this.propertyAddress = propertyAddress;
         this.purchasePrice = purchasePrice;
         this.downPayment = downPayment;
         this.interestRate = interestRate;
         this.taxes = taxes;
-        this.insurance = insurance;
-        this.additionalExpenses = additionalExpenses;
+        this.insuranceCosts = insuranceCosts;
+        this.additionalExpensesAnnual = additionalExpensesAnnual;
         this.closingCosts = closingCosts;
-        this.maintenanceCosts = maintenanceCosts;
-        this.managementCosts = managementCosts;
+        this.maintenanceFactor = maintenanceFactor;
+        this.managementFactor = managementFactor;
         this.renovationCosts = renovationCosts;
         this.loanTerm = loanTerm;
-        this.yearlyUtilities = yearlyUtilities;
-        this.vacancy = vacancy;
-        this.otherIncome = otherIncome;
-        this.rent = rent;
+        this.monthlyUtilities = monthlyUtilities;
+        this.vacancyFactor = vacancyFactor;
+        this.additionalIncome = additionalIncome;
+        this.totalRents = totalRents;
     }
     public int getId() {
         return id;
@@ -75,17 +76,17 @@ public class Property {
     public void setTaxes(float taxes) {
         this.taxes = taxes;
     }
-    public float getInsurance() {
-        return insurance;
+    public float getInsuranceCosts() {
+        return insuranceCosts;
     }
-    public void setInsurance(float insurance) {
-        this.insurance = insurance;
+    public void setInsuranceCosts(float insuranceCosts) {
+        this.insuranceCosts = insuranceCosts;
     }
-    public float getAdditionalExpenses() {
-        return additionalExpenses;
+    public float getAdditionalExpensesAnnual() {
+        return additionalExpensesAnnual;
     }
-    public void setAdditionalExpenses(float additionalExpenses) {
-        this.additionalExpenses = additionalExpenses;
+    public void setAdditionalExpensesAnnual(float additionalExpensesAnnual) {
+        this.additionalExpensesAnnual = additionalExpensesAnnual;
     }
     public float getClosingCosts() {
         return closingCosts;
@@ -93,23 +94,23 @@ public class Property {
     public void setClosingCosts(float closingCosts) {
         this.closingCosts = closingCosts;
     }
-    public float getMaintenanceCosts() {
-        return maintenanceCosts;
+    public float getMaintenanceFactor() {
+        return maintenanceFactor;
     }
-    public void setMaintenanceCosts(float maintenanceCosts) {
-        this.maintenanceCosts = maintenanceCosts;
+    public void setMaintenanceFactor(float maintenanceFactor) {
+        this.maintenanceFactor = maintenanceFactor;
     }
-    public float getManagementCosts() {
-        return managementCosts;
+    public float getManagementFactor() {
+        return managementFactor;
     }
-    public void setManagementCosts(float managementCosts) {
-        this.managementCosts = managementCosts;
+    public void setManagementFactor(float managementFactor) {
+        this.managementFactor = managementFactor;
     }
-    public float getRent() {
-        return rent;
+    public float getTotalRents() {
+        return totalRents;
     }
-    public void setRent(float rent) {
-        this.rent = rent;
+    public void setTotalRents(float totalRents) {
+        this.totalRents = totalRents;
     }
     public float getRenovationCosts() {
         return renovationCosts;
@@ -123,23 +124,29 @@ public class Property {
     public void setLoanTerm(float loanTerm) {
         this.loanTerm = loanTerm;
     }
-    public float getYearlyUtilities() {
-        return yearlyUtilities;
+    public float getMonthlyUtilities() {
+        return monthlyUtilities;
     }
-    public void setYearlyUtilities(float yearlyUtilities) {
-        this.yearlyUtilities = yearlyUtilities;
+    public void setMonthlyUtilities(float monthlyUtilities) {
+        this.monthlyUtilities = monthlyUtilities;
     }
-    public float getVacancy() {
-        return vacancy;
+    public float getVacancyFactor() {
+        return vacancyFactor;
     }
-    public void setVacancy(float vacancy) {
-        this.vacancy = vacancy;
+    public void setVacancyFactor(float vacancyFactor) {
+        this.vacancyFactor = vacancyFactor;
     }
-    public float getOtherIncome() {
-        return otherIncome;
+    public float getAdditionalIncome() {
+        return additionalIncome;
     }
-    public void setOtherIncome(float otherIncome) {
-        this.otherIncome = otherIncome;
+    public void setAdditionalIncome(float additionalIncome) {
+        this.additionalIncome = additionalIncome;
+    }
+    public CashFlowYield getCashFlowYield() {
+        return cashFlowYield;
+    }
+    public void setCashFlowYield(CashFlowYield cashFlowYield) {
+        this.cashFlowYield = cashFlowYield;
     }
 }
 

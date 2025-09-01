@@ -101,7 +101,7 @@ public class PropertyService {
     }
     public Optional<Property> getProperty(@RequestParam Integer id){
         Optional optional = Optional.empty();
-        for (Property property : properties){
+        for (Property property: properties){
             if(property.getId() == id){
                 optional = Optional.of(property);
                 return optional;
