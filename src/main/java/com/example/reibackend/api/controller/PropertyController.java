@@ -79,6 +79,16 @@ public class PropertyController {
 
         return amortizationSchedule;
     }
+    //Get amortization table
+    @GetMapping("/property/amortization-y1")
+    public double getYearOneAmortization(@RequestParam double purchasePrice,double downPayment,double annualRate,double years){
+
+        MortgageCalculationsService mcs = new MortgageCalculationsService();
+
+        double yearOne = mcs.yearOnePrincipal(purchasePrice,downPayment,annualRate,years);
+
+        return yearOne;
+    }
     @PostMapping("/property/cashflow")
     public CashFlowYield createRenovationCalc(@RequestBody Property property){
 

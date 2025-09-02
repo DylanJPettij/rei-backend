@@ -8,6 +8,10 @@ public class CashFlowYield {
     private double maintenanceExpense;
     private double managementExpense;
     private double VacancyExpense;
+    private double capitalRequired;
+    private double purchasePrice;
+    private double downPayment;
+    private double yearOnePrincipalPaydown;
 
 
     public  double getCashOnCashYield() {
@@ -51,5 +55,29 @@ public class CashFlowYield {
     }
     public void setVacancyExpense(double vacancyExpense) {
         VacancyExpense = vacancyExpense;
+    }
+    public double getCapitalRequired() {
+        return capitalRequired;
+    }
+    public void setCapitalRequired(double capitalRequired) {
+        this.capitalRequired = capitalRequired;
+    }
+    public double getPurchasePrice() {
+        return purchasePrice;
+    }
+    public void setPurchasePrice(double purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
+    public double getDownPayment() {
+        return downPayment;
+    }
+    public void setDownPayment(double downPayment) {
+        this.downPayment = downPayment;
+    }
+    public double getYearOnePrincipalPaydown() {
+        return yearOnePrincipalPaydown;
+    }
+    public void setYearOnePrincipalPaydown(double yearOnePrincipalPaydown) {
+        this.yearOnePrincipalPaydown = yearOnePrincipalPaydown;
     }
 }

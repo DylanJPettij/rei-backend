@@ -4,10 +4,7 @@ import com.example.reibackend.api.model.AmortizationTableEntry;
 import com.example.reibackend.api.model.CashFlowYield;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.Optional;
 
 
 @Service
@@ -41,6 +38,13 @@ public class MortgageCalculationsService {
     }
 
     public CashFlowYield CashFlow (double purchasePrice, double downPayment, double interestRate, double years, double renovationExpenses, double mortgagePayment, double maintenanceFactor, double vacancyFactor, double managementFactor, double taxes, double insurance, double closingCosts, double additionalExpenses, double rent, double otherIncome, double utilityExpense){
+
+        //Get year one principal paydown
+        MortgageCalculationsService mcs = new MortgageCalculationsService();
+
+        double yearOnePrincipalPaydown = mcs.yearOnePrincipal(purchasePrice,downPayment,interestRate,years);
+
+
         //create cashflow yield object that will be passed back
         CashFlowYield cashFlowYield = new CashFlowYield();
 
@@ -90,14 +94,32 @@ public class MortgageCalculationsService {
         cashFlowYield.setNetIncome(netIncome);
         cashFlowYield.setMaintenanceExpense(maintenanceExpense);
         cashFlowYield.setManagementExpense(managementExpense);
-
+        cashFlowYield.setVacancyExpense(Vacancy);
+        cashFlowYield.setCapitalRequired(entryCost);
+        cashFlowYield.setPurchasePrice(purchasePrice);
+        cashFlowYield.setDownPayment(downPayment);
+        cashFlowYield.setYearOnePrincipalPaydown(yearOnePrincipalPaydown);
 
         return cashFlowYield;
     }
 
     public double yearOnePrincipal (double purchasePrice, double downPayment, double interestRate, double years){
+        double totalPrincipalPaid = 0;
+        AmortizationTable amortizationSchedule = new AmortizationTable();
 
-        return 0;
+        amortizationSchedule = getAmortizationSchedule(purchasePrice, downPayment, interestRate, years);
+
+        ArrayList<AmortizationTableEntry> amortizationTableEntries = amortizationSchedule.getAmortizationSchedule();
+
+        //get principal paydown for the first 12 months
+        for (int month = 0; month <= 11; month++) {
+           totalPrincipalPaid = totalPrincipalPaid + amortizationTableEntries.get(month).getPrincipalPayment();
+           System.out.println(amortizationTableEntries.get(month).getPrincipalPayment());
+        }
+        totalPrincipalPaid = totalPrincipalPaid*100;
+        totalPrincipalPaid = Math.round(totalPrincipalPaid);
+        totalPrincipalPaid = totalPrincipalPaid/100;
+        return totalPrincipalPaid;
     }
 
     //this function will return the amortization table
@@ -106,7 +128,7 @@ public class MortgageCalculationsService {
 
         AmortizationTable amortizationSchedule = new AmortizationTable();
 
-        double monthlyPayment = MortgagePayment(purchasePrice, downPaymentDollars, annualRate, years);
+        double monthlyPayment = MortgagePayment(purchasePrice, downPayment, annualRate, years);
 
 
         double loanAmount = purchasePrice - downPaymentDollars;
@@ -116,8 +138,11 @@ public class MortgageCalculationsService {
 
         for (int month = 1; month <= years * 12; month++) {
             double interest = loanAmount * monthlyRate;
+
             double principalPaid = monthlyPayment - interest;
+
             loanAmount = loanAmount - principalPaid;
+
 
             //prevent overpayment
             if(loanAmount < 0) {
@@ -130,7 +155,6 @@ public class MortgageCalculationsService {
             entry.setInterestPayment(interest);
             entry.setPrincipalPayment(principalPaid);
             entry.setLoanAmount(loanAmount);
-            System.out.println(entry.getPrincipalPayment());
             amortizationTableEntries.add(entry);
         }
             amortizationSchedule.setAmortizationSchedule(amortizationTableEntries);
